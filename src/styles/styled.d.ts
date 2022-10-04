@@ -10,5 +10,9 @@ declare module 'styled-components' {
     sectionBg: string;
     containerBg: string;
     borderColor: string;
+    rangeTrackBg: string;
+    rangeThumbBorder: string;
+    rangeThumbBg: string;
+    rangeThumbBgActive: string;
   }
 }

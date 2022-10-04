@@ -10,15 +10,42 @@ export const passwordGenerator = (
   maxLength: number
 ) => {
   let password = '';
-  const lowerCase = 'abcdefghijklmnopqrstuvwxyz';
-  const upperCase = 'ABCEDFGHIJKLMNOPQRSTUVWXYZ';
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
   const numbers = '1234567890';
   const symbols = '!@#$%^&*';
   const charList: string[] = [];
-  if (withLowerCase) charList.push(lowerCase);
-  if (withUpperCase) charList.push(upperCase);
-  if (withNumbers) charList.push(numbers);
-  if (withSymbols) charList.push(symbols);
+  if (withLowerCase) {
+    const RNG = Math.floor(Math.random() * 2);
+    if (RNG === 1) {
+      charList.push(letters);
+    } else {
+      charList.unshift(letters);
+    }
+  }
+  if (withUpperCase) {
+    const RNG = Math.floor(Math.random() * 2);
+    if (RNG === 1) {
+      charList.push(letters.toUpperCase());
+    } else {
+      charList.unshift(letters.toUpperCase());
+    }
+  }
+  if (withNumbers) {
+    const RNG = Math.floor(Math.random() * 2);
+    if (RNG === 1) {
+      charList.push(numbers);
+    } else {
+      charList.unshift(numbers);
+    }
+  }
+  if (withSymbols) {
+    const RNG = Math.floor(Math.random() * 2);
+    if (RNG === 1) {
+      charList.push(symbols);
+    } else {
+      charList.unshift(symbols);
+    }
+  }
   for (let i = 0; i < maxLength; i++) {
     if (i < charList.length) {
       password += charList[i].charAt(Math.floor(Math.random() * charList[i].length));

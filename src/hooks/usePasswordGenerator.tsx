@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { IPasswordGeneratorInput, passwordGenerator } from '../utils/passwordGenerator';
 
+const MAX_PASSWORD_LENGTH = 20;
+
 const usePasswordGenerator = () => {
   const [password, setPassword] = useState('');
 
@@ -16,14 +18,23 @@ const usePasswordGenerator = () => {
   const [passwordScore, setPasswordScore] = useState(2);
 
   const [passwordStrength, setPasswordStrength] = useState<{
-    score: number;
-    strength: 'WEAK' | 'MEDIUM' | 'STRONG' | 'VERY STRONG';
+    strength: 'VERY BAD' | 'BAD' | 'GOOD' | 'GREAT';
     color: string;
   }>({
-    score: 0,
-    strength: 'WEAK',
+    strength: 'VERY BAD',
     color: '',
   });
+
+  const [areOptionsActive, setAreOptionsActive] = useState(false);
+
+  const checkIfAtLeastOneOptionIsActive = () => {
+    return (
+      passwordOptions.withLowerCase ||
+      passwordOptions.withUpperCase ||
+      passwordOptions.withNumbers ||
+      passwordOptions.withSymbols
+    );
+  };
 
   const handleGeneratePassword = () => {
     if (
@@ -55,43 +66,66 @@ const usePasswordGenerator = () => {
   };
 
   const calculatePasswordStrength = () => {
-    if (passwordLength > 11) {
+    let score = 0;
+
+    if (passwordLength >= 16) {
+      score += 50;
+    } else if (passwordLength >= 12 && passwordLength < 16) {
+      score += 37.5;
+    } else if (passwordLength >= 8 && passwordLength < 12) {
+      score += 25;
+    } else if (passwordLength < 8) {
+      score += 12.5;
+    }
+
+    if (passwordOptions.withLowerCase) score += 12.5;
+    if (passwordOptions.withUpperCase) score += 12.5;
+    if (passwordOptions.withNumbers) score += 12.5;
+    if (passwordOptions.withSymbols) score += 12.5;
+
+    setPasswordScore(score);
+    if (score > 87.5) {
       setPasswordStrength((prevState) => ({
         ...prevState,
-        score: 3,
-        strength: 'VERY STRONG',
-        color: 'green',
-      }));
-    } else if (passwordLength >= 8 && passwordLength < 11) {
-      setPasswordStrength((prevState) => ({
-        ...prevState,
-        score: 2,
-        strength: 'STRONG',
+        strength: 'GREAT',
         color: 'lightgreen',
       }));
-    } else if (passwordLength >= 6 && passwordLength < 8) {
+      return;
+    }
+    if (score > 75 && score <= 87.5) {
       setPasswordStrength((prevState) => ({
         ...prevState,
-        score: 1,
-        strength: 'MEDIUM',
+        strength: 'GOOD',
+        color: 'yellow',
+      }));
+      return;
+    }
+    if (score > 62.5 && score <= 75) {
+      setPasswordStrength((prevState) => ({
+        ...prevState,
+        strength: 'BAD',
         color: 'orange',
       }));
-    } else if (passwordLength < 6) {
+      return;
+    }
+    if (score <= 62.5) {
       setPasswordStrength((prevState) => ({
         ...prevState,
-        score: 0,
-        strength: 'WEAK',
+        strength: 'VERY BAD',
         color: 'red',
       }));
+      return;
     }
   };
 
   useEffect(() => {
     handleGeneratePassword();
     calculatePasswordStrength();
+    setAreOptionsActive(checkIfAtLeastOneOptionIsActive());
   }, [passwordOptions, passwordLength]);
 
   return {
+    MAX_PASSWORD_LENGTH,
     password,
     passwordLength,
     passwordOptions,
@@ -101,6 +135,7 @@ const usePasswordGenerator = () => {
     handleUpdatePasswordOptions,
     handleChangePasswordLength,
     handleCopyToClipboard,
+    areOptionsActive,
   };
 };
 

@@ -5,10 +5,11 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'JetBrains Mono', monospace;
     }
     body {
         background-color:#131218;
+        -webkit-font-smoothing: antialiased;
     }
     button {
         cursor: pointer;

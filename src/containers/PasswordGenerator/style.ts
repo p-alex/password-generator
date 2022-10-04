@@ -18,11 +18,23 @@ export const Title = styled.h1`
 export const ResultContainer = styled.div`
   position: relative;
   width: 100%;
-  padding: 20px;
+  padding: 17px 20px;
   background-color: ${(props) => props.theme.containerBg};
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const PasswordText = styled.p`
+  font-weight: bold;
+  color: ${(props) => props.theme.textColor};
+  font-size: 1.2rem;
+`;
+
+export const PasswordPlaceholder = styled.p`
+  color: ${(props) => props.theme.mutedTextColor};
+  font-size: 1.2rem;
+  font-weight: bold;
 `;
 
 export const Text = styled.p`
@@ -36,7 +48,23 @@ export const AccentText = styled.p`
 `;
 
 export const CopyBtn = styled.button`
+  width: 30px;
+  height: 30px;
   color: ${(props) => props.theme.textColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  &:hover {
+    color: ${(props) => props.theme.accentColor};
+  }
+`;
+
+export const RangeContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 `;
 
 export const OptionsContainer = styled.div`
@@ -46,7 +74,7 @@ export const OptionsContainer = styled.div`
   background-color: ${(props) => props.theme.containerBg};
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 `;
 
 export const CharacterLengthContainer = styled.div`
@@ -57,20 +85,24 @@ export const CharacterLengthContainer = styled.div`
   align-items: center;
 `;
 
-export const Range = styled.input`
-  margin-top: 10px;
-  width: 100%;
-`;
-
 export const PasswordOptions = styled.div``;
 
 export const InputGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
-export const Checkbox = styled.input``;
+export const Checkbox = styled.input`
+  accent-color: ${(props) => props.theme.accentColor};
+  transform: scale(1.4);
+  background-color: red;
+`;
 
 export const Label = styled.label`
   color: ${(props) => props.theme.textColor};
@@ -82,11 +114,13 @@ export const StrengthContainer = styled.div`
   align-items: center;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.sectionBg};
-  padding: 10px;
+  padding: 15px;
 `;
 
 export const StrengthMeterText = styled.p`
   color: ${(props) => props.theme.mutedTextColor};
+  text-transform: uppercase;
+  font-weight: 700;
 `;
 
 export const StrengthMeter = styled.div`
@@ -107,19 +141,32 @@ export const StrengthMeterRectangles = styled.div<{
   height: 25px;
   border: solid ${(props) => (props.active ? props.color : props.theme.borderColor)} 2px;
   background-color: ${(props) => (props.active ? props.color : 'transparent')};
+  box-shadow: ${(props) => (props.active ? `0 0 5px ${props.color}` : 'none')};
   margin-right: 5px;
+  transition: background 100ms ease-in-out;
   &:last-child {
     margin-right: 0;
   }
 `;
 
 export const GenerateBtn = styled.button`
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
   padding: 12px;
+  border: solid transparent 2px;
   background-color: ${(props) => props.theme.accentColor};
   color: ${(props) => props.theme.darkTextColor};
   text-align: center;
   font-size: 0.8rem;
   font-weight: bold;
+  transition: border 100ms ease-in-out, background 100ms ease-in-out,
+    color 100ms ease-in-out;
+  &:hover {
+    border: solid ${(props) => props.theme.accentColor} 2px;
+    background-color: transparent;
+    color: ${(props) => props.theme.accentColor};
+  }
 `;

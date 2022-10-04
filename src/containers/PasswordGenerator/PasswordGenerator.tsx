@@ -1,6 +1,8 @@
 import React from 'react';
 import { MdContentCopy } from 'react-icons/md';
+import { BiRightArrowAlt } from 'react-icons/bi';
 import usePasswordGenerator from '../../hooks/usePasswordGenerator';
+import Slider from '../../ui/Slider';
 import {
   AccentText,
   CharacterLengthContainer,
@@ -11,7 +13,8 @@ import {
   Label,
   OptionsContainer,
   PasswordOptions,
-  Range,
+  PasswordPlaceholder,
+  PasswordText,
   ResultContainer,
   StrengthContainer,
   StrengthMeter,
@@ -29,17 +32,24 @@ const PasswordGenerator = () => {
     passwordLength,
     passwordOptions,
     passwordStrength,
+    passwordScore,
     handleUpdatePasswordOptions,
     handleChangePasswordLength,
     handleGeneratePassword,
     handleCopyToClipboard,
+    areOptionsActive,
   } = usePasswordGenerator();
   return (
     <Wrapper>
       <Title>Password Generator</Title>
 
       <ResultContainer>
-        <Text id="password">{password}</Text>
+        {passwordLength !== 0 && areOptionsActive && (
+          <PasswordText id="password">{password}</PasswordText>
+        )}
+        {(passwordLength === 0 || areOptionsActive === false) && (
+          <PasswordPlaceholder>sXAjFuGH</PasswordPlaceholder>
+        )}
         <CopyBtn title="Copy password" onClick={handleCopyToClipboard}>
           <MdContentCopy />
         </CopyBtn>
@@ -51,26 +61,12 @@ const PasswordGenerator = () => {
           <AccentText>{passwordLength}</AccentText>
         </CharacterLengthContainer>
 
-        <Range
-          type={'range'}
-          min="1"
-          max="20"
-          step={1}
-          value={passwordLength}
-          onChange={(e) => handleChangePasswordLength(e)}
+        <Slider
+          passwordLength={passwordLength}
+          handleChangePasswordLength={handleChangePasswordLength}
         />
 
         <PasswordOptions>
-          <InputGroup>
-            <Checkbox
-              type="checkbox"
-              name="withLowerCase"
-              id="c2"
-              checked={passwordOptions['withLowerCase']}
-              onChange={(e) => handleUpdatePasswordOptions(e)}
-            />
-            <Label htmlFor="c2">Include Lowercase Letters</Label>
-          </InputGroup>
           <InputGroup>
             <Checkbox
               type="checkbox"
@@ -80,6 +76,16 @@ const PasswordGenerator = () => {
               onChange={(e) => handleUpdatePasswordOptions(e)}
             />
             <Label htmlFor="c1">Include Uppercase Letters</Label>
+          </InputGroup>
+          <InputGroup>
+            <Checkbox
+              type="checkbox"
+              name="withLowerCase"
+              id="c2"
+              checked={passwordOptions['withLowerCase']}
+              onChange={(e) => handleUpdatePasswordOptions(e)}
+            />
+            <Label htmlFor="c2">Include Lowercase Letters</Label>
           </InputGroup>
           <InputGroup>
             <Checkbox
@@ -106,21 +112,27 @@ const PasswordGenerator = () => {
         <StrengthContainer>
           <StrengthMeterText>Strength</StrengthMeterText>
           <StrengthMeter>
-            <Text>{passwordStrength.strength}</Text>
+            {passwordLength !== 0 && areOptionsActive && (
+              <Text>{passwordStrength.strength}</Text>
+            )}
             <StrengthMeterRectanglesContainer>
-              {[0, 1, 2, 3].map((_, index) => {
+              {[0, 75, 87.5, 100].map((score) => {
                 return (
                   <StrengthMeterRectangles
-                    key={'rectangle' + index}
+                    key={'rectangle' + score}
                     color={passwordStrength.color}
-                    active={index <= passwordStrength.score}
+                    active={
+                      score <= passwordScore && passwordLength !== 0 && areOptionsActive
+                    }
                   />
                 );
               })}
             </StrengthMeterRectanglesContainer>
           </StrengthMeter>
         </StrengthContainer>
-        <GenerateBtn onClick={handleGeneratePassword}>GENERATE</GenerateBtn>
+        <GenerateBtn onClick={handleGeneratePassword}>
+          GENERATE <BiRightArrowAlt />
+        </GenerateBtn>
       </OptionsContainer>
     </Wrapper>
   );
