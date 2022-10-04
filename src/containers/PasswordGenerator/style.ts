@@ -115,7 +115,7 @@ export const StrengthContainer = styled.div`
   align-items: center;
   color: ${(props) => props.theme.textColor};
   background-color: ${(props) => props.theme.sectionBg};
-  padding: 15px;
+  padding: 20px;
 `;
 
 export const StrengthMeterText = styled.p`
@@ -138,7 +138,7 @@ export const StrengthMeterRectangles = styled.div<{
   color: string;
   active: boolean;
 }>`
-  width: 10px;
+  width: 9px;
   height: 25px;
   border: solid ${(props) => (props.active ? props.color : props.theme.borderColor)} 2px;
   background-color: ${(props) => (props.active ? props.color : 'transparent')};
