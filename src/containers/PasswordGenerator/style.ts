@@ -42,9 +42,10 @@ export const Text = styled.p`
   color: ${(props) => props.theme.textColor};
 `;
 
-export const AccentText = styled.p`
+export const PasswordLength = styled.p`
   font-weight: bold;
   color: ${(props) => props.theme.accentColor};
+  font-size: 1.2rem;
 `;
 
 export const CopyBtn = styled.button`

@@ -4,7 +4,6 @@ import { BiRightArrowAlt } from 'react-icons/bi';
 import usePasswordGenerator from '../../hooks/usePasswordGenerator';
 import Slider from '../../ui/Slider';
 import {
-  AccentText,
   CharacterLengthContainer,
   Checkbox,
   CopyBtn,
@@ -12,6 +11,7 @@ import {
   InputGroup,
   Label,
   OptionsContainer,
+  PasswordLength,
   PasswordOptions,
   PasswordPlaceholder,
   PasswordText,
@@ -58,7 +58,7 @@ const PasswordGenerator = () => {
       <OptionsContainer>
         <CharacterLengthContainer>
           <Text>Character Length</Text>
-          <AccentText>{passwordLength}</AccentText>
+          <PasswordLength>{passwordLength}</PasswordLength>
         </CharacterLengthContainer>
 
         <Slider
