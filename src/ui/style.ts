@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Range = styled.input`
-  margin-top: 10px;
+  position: relative;
   width: 100%;
   position: relative;
   background: ${(props) => props.theme.rangeTrackBg};

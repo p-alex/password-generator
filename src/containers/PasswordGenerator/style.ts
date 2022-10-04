@@ -18,7 +18,7 @@ export const Title = styled.h1`
 export const ResultContainer = styled.div`
   position: relative;
   width: 100%;
-  padding: 17px 20px;
+  padding: 20px;
   background-color: ${(props) => props.theme.containerBg};
   display: flex;
   justify-content: space-between;
