@@ -11,9 +11,10 @@ export const passwordGenerator = (
 ) => {
   let password = '';
   const letters = 'abcdefghijklmnopqrstuvwxyz';
-  const numbers = '1234567890';
-  const symbols = '!@#$%^&*';
+  const numbers = '2937438916';
+  const symbols = `!?'"$%^&*()[]{}_-+=.,:;@~#<>/\|`;
   const charList: string[] = [];
+
   if (withLowerCase) {
     const RNG = Math.floor(Math.random() * 2);
     if (RNG === 1) {
