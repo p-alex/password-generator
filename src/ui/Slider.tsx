@@ -26,6 +26,7 @@ const Slider = ({
   return (
     <RangeContainer>
       <Range
+        aria-label={`Current password length is ${passwordLength}`}
         type={'range'}
         min={'0'}
         max={MAX_PASSWORD_LENGTH}
