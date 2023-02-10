@@ -1,4 +1,4 @@
-export interface IPasswordGeneratorInput {
+export interface PasswordCharacters {
   withLowerCase: boolean;
   withUpperCase: boolean;
   withNumbers: boolean;
@@ -6,8 +6,8 @@ export interface IPasswordGeneratorInput {
 }
 
 export const passwordGenerator = (
-  { withLowerCase, withUpperCase, withNumbers, withSymbols }: IPasswordGeneratorInput,
-  maxLength: number
+  { withLowerCase, withUpperCase, withNumbers, withSymbols }: PasswordCharacters,
+  passwordLength: number
 ) => {
   let password = '';
   const letters = 'abcdefghijklmnopqrstuvwxyz';
@@ -47,7 +47,7 @@ export const passwordGenerator = (
       charList.unshift(symbols);
     }
   }
-  for (let i = 0; i < maxLength; i++) {
+  for (let i = 0; i < passwordLength; i++) {
     if (i < charList.length) {
       password += charList[i].charAt(Math.floor(Math.random() * charList[i].length));
     } else {
