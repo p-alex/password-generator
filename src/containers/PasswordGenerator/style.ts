@@ -23,6 +23,16 @@ export const ResultContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 90px;
+  @media (max-width: 450px) {
+    height: 110px;
+  }
+  @media (max-width: 350px) {
+    height: 120px;
+  }
+  @media (max-width: 270px) {
+    height: 150px;
+  }
 `;
 
 export const PasswordText = styled.p`
@@ -51,8 +61,8 @@ export const PasswordLength = styled.p`
 `;
 
 export const CopyBtn = styled.button`
-  width: 30px;
-  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   color: ${(props) => props.theme.textColor};
   display: flex;
   align-items: center;
