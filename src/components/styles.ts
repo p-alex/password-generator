@@ -13,7 +13,7 @@ export const Footer__Container = styled.footer`
   color: white;
   & span {
     font-weight: 700;
-    color: white;
+    color: ${(props) => props.theme.accentColor};
   }
 `;
 
@@ -29,10 +29,10 @@ export const Footer__SocialLink = styled.a`
   justify-content: center;
   & svg {
     font-size: 2rem;
-    color: ${(props) => props.theme.textColor};
     transition: color 150ms ease-in-out;
+    color: ${(props) => props.theme.textColor};
   }
   &:hover svg {
-    color: ${(props) => props.theme.textColor};
+    color: ${(props) => props.theme.accentColor};
   }
 `;
