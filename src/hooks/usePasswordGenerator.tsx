@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IPasswordGeneratorInput, passwordGenerator } from '../utils/passwordGenerator';
 
-const MAX_PASSWORD_LENGTH = 20;
+const MAX_PASSWORD_LENGTH = 64;
 
 const usePasswordGenerator = () => {
   const [password, setPassword] = useState('');

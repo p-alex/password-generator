@@ -29,6 +29,8 @@ export const PasswordText = styled.p`
   font-weight: bold;
   color: ${(props) => props.theme.textColor};
   font-size: 1.2rem;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
 
 export const PasswordPlaceholder = styled.p`
@@ -56,6 +58,7 @@ export const CopyBtn = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
+  margin-left: 16px;
   &:hover {
     color: ${(props) => props.theme.accentColor};
   }
