@@ -12,7 +12,7 @@ export const passwordGenerator = (
   let password = '';
   const letters = 'abcdefghijklmnopqrstuvwxyz';
   const numbers = '2937438916';
-  const symbols = `!?'"$%^&*()[]{}_-+=.,:;@~#<>/\|`;
+  const symbols = `!?$%^&*()[]{}_-+=.,:;@~#<>/\|`;
   const charList: string[] = [];
 
   if (withLowerCase) {
